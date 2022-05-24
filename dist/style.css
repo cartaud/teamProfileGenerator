@@ -1,5 +1,5 @@
 h1 {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 400;
 }
 
@@ -14,7 +14,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px;
+    padding: 60px;
 }
 
 #container {
@@ -32,7 +32,7 @@ header {
     margin-bottom: 30px;
     display: flex;
     flex-direction: column;
-    box-shadow: 4px 4px 5px 3px rgba(0,0,0,0.75);
+    box-shadow: 4px 3px 8px 0px rgba(0,0,0,0.75);
     border-radius: 3px;
 }
 
@@ -51,7 +51,7 @@ header {
     background-color: rgb(239, 239, 239);
     display: flex;
     flex-direction: column;
-    padding: 30px 10px;
+    padding: 30px 14px;
     border-left:1px solid rgb(223, 223, 223);
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
