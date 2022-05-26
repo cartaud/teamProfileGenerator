@@ -1,8 +1,3 @@
-# 
-
-
-https://drive.google.com/file/d/1NDYYvr9V5jBZ1kpNmKqNRv98gn8rUidK/view?usp=sharing
-
 ## teamProfileGenerator 
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   ### Description
