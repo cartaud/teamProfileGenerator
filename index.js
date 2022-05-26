@@ -24,7 +24,7 @@ employees.forEach(employee => {
             </div>
             <div class='employeeInfo'>
                 <div class="id">ID: ${employee.getId()}</div>
-                <div class="email">EMAIL: ${employee.getEmail()}</div>
+                <div class="email">EMAIL: <a href="mailto:${employee.getEmail()}" target="_blank">${employee.getEmail()}</a></div>
                 <div class="last">Office number: ${employee.getOfficeNumber()}</div>
             </div>
         </div>
@@ -39,8 +39,8 @@ employees.forEach(employee => {
             </div>
             <div class='employeeInfo'>
                 <div class="id">ID: ${employee.getId()}</div>
-                <div class="email">EMAIL: ${employee.getEmail()}</div>
-                <div class="last">GitHub: <a href='https://github.com/${employee.getGitHub()}'>${employee.getGitHub()}</a></div>
+                <div class="email">EMAIL: <a href="mailto:${employee.getEmail()}" target="_blank">${employee.getEmail()}</a></div>
+                <div class="last">GitHub: <a href='https://github.com/${employee.getGitHub()}' target="_blank">${employee.getGitHub()}</a></div>
             </div>
         </div>
         `
@@ -54,7 +54,7 @@ employees.forEach(employee => {
             </div>
             <div class='employeeInfo'>
                 <div class="id">ID: ${employee.getId()}</div>
-                <div class="email">EMAIL: ${employee.getEmail()}</div>
+                <div class="email">EMAIL: <a href="mailto:${employee.getEmail()}" target="_blank">${employee.getEmail()}</a></div>
                 <div class="last">School: ${employee.getSchool()}</div>
             </div>
         </div>
@@ -90,7 +90,7 @@ fs.writeFile(`./dist/team.html`, mainTemplate, (err) =>
 err
   ? console.error(err)
   : console.log(
-      `Team cards have been generated, view it -->`
+      `Team cards have been generated,\n you can view the html in the dist folder`
     )
 );
     
@@ -98,6 +98,7 @@ err
 
 //a function to initialize app
 function addManager() {
+    console.log('\nWelcome to the team generator!\n\nPlease build your team👥')
     inquirer
     .prompt([
         {
