@@ -1,54 +1,99 @@
 const inquirer = require('inquirer') ;
+const fs = require('fs')
 const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
 
-// const containerEl = document.querySelector('#container')
 
 const employees = []
 
 //a function to write README file
 function generate() {
-    employees.forEach(employee => {
-        const employeeRole = employee.getRole()
-        const card = document.createElement('div')
-        
-        if (employeeRole == 'Manager') {
-            card.innerHTML = `
-            <h1>${employee.getName()}</h1>
-            <h2><i class="fa-solid fa-mug-hot"></i> ${employeeRole}</h2>
-            <div class='employeeInfo'>
-                <div>ID: ${employee.getId()}</div>
-                <div>EMAIL: ${employee.getEmail()}</div>
-                <div>Office number: ${employee.getOfficeNumber()}</div>
+
+    let cards = "";
+//cards +=
+//loop through each employee and add each to cards
+employees.forEach(employee => {
+    const employeeRole = employee.getRole()
+    if (employeeRole == 'Manager') {
+        cards += `
+        <div class="card">
+            <div class="employeeHeader">
+                <h1>${employee.getName()}</h1>
+                <h2><i class="fa-solid fa-mug-hot"></i> ${employeeRole}</h2>
             </div>
-            `
-        }
-        else if (employeeRole == 'Engineer') {
-            card.innerHTML = `
-            <h1>${employee.getName()}</h1>
-            <h2><i class="fa-solid fa-glasses"></i> ${employeeRole}</h2>
             <div class='employeeInfo'>
-                <div>ID: ${employee.getId()}</div>
-                <div>EMAIL: ${employee.getEmail()}</div>
-                <div>GitHub: <a href='https://github.com/${employee.getGitHub()}'>${employee.getGitHub()}</a></div>
+                <div class="id">ID: ${employee.getId()}</div>
+                <div class="email">EMAIL: ${employee.getEmail()}</div>
+                <div class="last">Office number: ${employee.getOfficeNumber()}</div>
             </div>
-            `
-        }
-        else if (employeeRole == 'Intern') {
-            card.innerHTML = `
-            <h1>${employee.getName()}</h1>
-            <h2><i class="fa-solid fa-user-graduate"></i> ${employeeRole}</h2>
+        </div>
+        `
+    }
+    else if (employeeRole == 'Engineer') {
+        cards += `
+        <div class="card">
+            <div class="employeeHeader">
+                <h2>${employee.getName()}</h2>
+                <h2><i class="fa-solid fa-glasses"></i> ${employeeRole}</h2>
+            </div>
             <div class='employeeInfo'>
-                <div>ID: ${employee.getId()}</div>
-                <div>EMAIL: ${employee.getEmail()}</div>
-                <div>School: ${employee.getSchool()}</div>
+                <div class="id">ID: ${employee.getId()}</div>
+                <div class="email">EMAIL: ${employee.getEmail()}</div>
+                <div class="last">GitHub: <a href='https://github.com/${employee.getGitHub()}'>${employee.getGitHub()}</a></div>
             </div>
-            `
-        }
-        
-        containerEl.append(card)
-    })
+        </div>
+        `
+    }
+    else if (employeeRole == 'Intern') {
+        cards += `
+        <div class="card">
+            <div class="employeeHeader">
+                <h2>${employee.getName()}</h2>
+                <h2><i class="fa-solid fa-user-graduate"></i> ${employeeRole}</h2>
+            </div>
+            <div class='employeeInfo'>
+                <div class="id">ID: ${employee.getId()}</div>
+                <div class="email">EMAIL: ${employee.getEmail()}</div>
+                <div class="last">School: ${employee.getSchool()}</div>
+            </div>
+        </div>
+        `
+    }
+})
+    
+    const mainTemplate = `
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/7f7e12b7b0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../src/reset.css">
+    <link rel="stylesheet" href="./style.css">
+    <title>MyTeam</title>
+</head>
+<body>
+    <header><h1>My Team</h1></header>
+    <div id="container">
+        ${cards}
+    </div>
+</body>
+</html>`;
+    
+fs.writeFile(`./dist/team.html`, mainTemplate, (err) =>
+err
+  ? console.error(err)
+  : console.log(
+      `Team cards have been generated, view it -->`
+    )
+);
+    
 }
 
 //a function to initialize app
