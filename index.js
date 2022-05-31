@@ -1,21 +1,20 @@
-const inquirer = require('inquirer') ;
-const fs = require('fs')
-const Manager = require('./lib/manager');
-const Engineer = require('./lib/engineer');
-const Intern = require('./lib/intern');
+const inquirer = require('inquirer') ; //package that is used to prompt the user to answering questions 
+const fs = require('fs') //gives access to file system, allowing us to generate html page
+const Manager = require('./lib/manager'); //class module that is used to create a new instance of Manager object  
+const Engineer = require('./lib/engineer'); //class module that is used to create a new instance of Engineer object 
+const Intern = require('./lib/intern'); //class module that is used to create a new instance of Intern object 
 
-
+//array where new employees will be added
 const employees = []
 
 //a function to write README file
 function generate() {
 
-    let cards = "";
-//cards +=
+let cards = "";
 //loop through each employee and add each to cards
 employees.forEach(employee => {
     const employeeRole = employee.getRole()
-    if (employeeRole == 'Manager') {
+    if (employeeRole == 'Manager') { //card template for manager
         cards += `
         <div class="card">
             <div class="employeeHeader">
@@ -30,7 +29,7 @@ employees.forEach(employee => {
         </div>
         `
     }
-    else if (employeeRole == 'Engineer') {
+    else if (employeeRole == 'Engineer') { //card template for engineer
         cards += `
         <div class="card">
             <div class="employeeHeader">
@@ -45,7 +44,7 @@ employees.forEach(employee => {
         </div>
         `
     }
-    else if (employeeRole == 'Intern') {
+    else if (employeeRole == 'Intern') { //card template for Intern 
         cards += `
         <div class="card">
             <div class="employeeHeader">
@@ -61,7 +60,7 @@ employees.forEach(employee => {
         `
     }
 })
-    
+    //template for entire html page
     const mainTemplate = `
     <!DOCTYPE html>
 <html lang="en">
@@ -86,7 +85,7 @@ employees.forEach(employee => {
 </body>
 </html>`;
     
-fs.writeFile(`./dist/team.html`, mainTemplate, (err) =>
+fs.writeFile(`./dist/team.html`, mainTemplate, (err) => //creates the html page with the provided information
 err
   ? console.error(err)
   : console.log(
@@ -96,8 +95,8 @@ err
     
 }
 
-//a function to initialize app
-function addManager() {
+//when application is initialized, this function will run first 
+function addManager() { //a series of questions that are unique to the manager role that the user answers 
     console.log('\nWelcome to the team generator!\n\nPlease build your team👥')
     inquirer
     .prompt([
@@ -125,7 +124,7 @@ function addManager() {
     .then(createEmployee);
 }
 
-function addEngineer() {
+function addEngineer() { //a series of questions that are unique to the engineering role that the user answers 
     inquirer
     .prompt([
         {
@@ -152,7 +151,7 @@ function addEngineer() {
     .then(createEmployee);
 }
 
-function addIntern() {
+function addIntern() { //a series of questions that are unique to the intern role that the user answers 
     inquirer
     .prompt([
         {
@@ -179,7 +178,7 @@ function addIntern() {
     .then(createEmployee);
 }
 
-function createEmployee(data) {
+function createEmployee(data) { //a new employee is created depending on information gathered from previous function 
     const employeeType = Object.keys(data)[0]
     if (/manager/.test(employeeType)) {
         const manager = new Manager(data.managerName, data.managerId, data.managerEmail, data.managerOffice)
@@ -196,7 +195,7 @@ function createEmployee(data) {
     menu()
 }
 
-function menu() {
+function menu() { //a function that ask the user the next employee they want to add
     inquirer
     .prompt([
         {
@@ -209,7 +208,7 @@ function menu() {
     .then(addEmployee);
 }
 
-function addEmployee(data){
+function addEmployee(data){ //the user will create an engineer, intern, or generate html depending on choice from menu()
     if (data.nextEmployee == 'Engineer') {
         addEngineer()
     }
@@ -220,5 +219,5 @@ function addEmployee(data){
     
 }
 
-// Function call to initialize app
+//call manager function to initialize app
 addManager();
