@@ -1,4 +1,7 @@
 ## readmeGenerator 
+
+## teamProfileGenerator 
+
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   ### Description
   Generate a README file for your projects by answering a series of short questions
